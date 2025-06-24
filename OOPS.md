@@ -5,25 +5,31 @@
     - High-level languages are closer to human language; easier to write and read [Java, C++, Python]
 
 - What are the types of programming languages based on programming paradigm?
+
     1. Procedural Languages
+
         - Focus on functions and procedure calls
         - Code is executed line by line
         - Examples: C, Pascal
 
     2. Object-Oriented Languages (OOP)
+
         - Based on objects and classes
         - Examples: Java, C++, Python
 
     3. Functional Languages
+
         - Treat computation as evaluation of functions
         - Avoid changing state and mutable data
         - Examples: Haskell, Lisp, Scala
 
     4. Scripting Languages
+
         - Used for automating tasks; often interpreted
         - Examples: Python, JavaScript, Bash
 
     5. Logic-Based Languages
+
         - Based on formal logic
         - Example: Prolog
 
@@ -81,8 +87,121 @@
 
     - Primitive data types are passed by value and non primitive data types are passed by reference. Java supports only call be value and not call by reference 
 
+- Does Java support destructors?
+    No, Java does not support destructors because:
+    - Java uses Garbage Collection (GC) to manage memory automatically
+    - You don't need to manually delete objects like in C++
 
+- What is the use of finalize()?
+    - In Java, while you can't control when an object is deleted, you can specify what happens during deletion using finalize()
+    - The finalize() method is called by the garbage collector before reclaiming the object's memory
 
+```java
+protected void finalize() throws Throwable {
+    System.out.println("The object is being deleted");
+}
+```
+    - The above code executes before the object is deleted by the garbage collector
+
+Note: The finalize() method has been deprecated since Java 9. It is recommended to use try-with-resources or explicit cleanup methods instead.
+
+## Package 
+
+- What is package ?
+    
+    - A package in Java is a way to group related classes, interfaces, and sub-packages together.
+
+    - Think of it like a folder on your computer that organizes files.
+
+    - You can't creat two classes with the same name in a single package.
+
+## Keywords 
+
+### this 
+
+  - What are the uses of 'this' keyword?
+
+      - Access instance variables when local variables have the same name (this.rollno)
+
+      - Call another constructor in the same class (constructor chaining)
+
+      - Pass the current object as a parameter to another method/constructor
+
+      - Return the current object from a method
+
+### final 
+
+- Did variables ( primitive data types ) declared as final allow modifications ?
+    
+    - No , it don't allow modifications. 
+    
+    - So , it's compulsory to intialize the final variables during the declaration or using the static blocks.
+
+- Did variables ( non primitive data types ) declared as final allow modifications ?
+
+    - Yes , modifications are allowed but re assigning is not allowed.
+
+```java
+class A{
+    String name = "ABD";
+
+    public static void main(String args[])
+    {
+        final A obj1 = new A();
+        
+        obj1.name = "Virat"; // modifications are allowed
+
+        obj1 = new A() ; // re assigning is not allowed
+
+    }
+}
+```
+
+### static 
+
+- Memory for the static variables are created at only once ?
+    
+    - Yes, memory for static variables is created only once per class, when the class is loaded into memory, not at compile time, but at runtime.
+
+- Can static variables are methods can be accessed before the object creation ?
+
+    - Yes , they don't depend on object , hence the can be accessed before the object creation using the class name.
+
+- Can the static variables are accessed using the objects of the class ?
+
+    - Yes , it possible because during the compile time the object is treated as it's class name.
+    
+    - The static variables are common to all the objects of a class.
+
+- Can you call a non-static method inside a static method ?
+
+    - No , because the non static method depends on the object whereas the static methods doesn't depends on the object.
+
+    - If you want to do so create an object then access it.
+
+- Can you call a static method inside a non - static method ?
+
+    - Yes , it's possible.
+
+- Can we use ``` this ``` inside a static method ?
+
+    - No , this belongs to an object whereas the static methods are not dependent on the object. Hence it's not possible.
+
+- What is static blocks ?
+
+    - Static blocks are inside a class that runs once , when the class is loaded into the memory.
+    
+    - It's used to intialize static variables / run setup codes.
+
+    - These are class levels , hence they're resolved during the compile time itself.
+
+- Can a main function of class can be called from another class ?
+
+    - Yes it's possible. Because they're public ( accessable from anywhere ) , static ( object independent ).
+
+- What happens in a nested class ,when the inner class is declared as static ?
+
+    - The inner class become independent of outer class. No need to create object for the outer class to access the inner class.
 
 
 
