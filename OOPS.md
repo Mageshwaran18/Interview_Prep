@@ -37,11 +37,30 @@
 
 - OOP (Object-Oriented Programming) is a programming paradigm that organizes software design around objects rather than functions and logic.
 
+#### 4 Pillars of OOP :-
+
+1. Encapsulation - Hides internal data and exposes only what’s necessary.
+
+2. Abstraction - Hides complex implementation and shows only important details.
+
+3. Inheritance - Same method behaves differently based on the object.
+
+4. Polymorphism - Same method behaves differently based on the object.
+
+
 #### Q/A :-
 
 - What is Class ?
 
     - A blueprint for creating objects. It defines properties (attributes) and behaviors (methods).
+
+- What is Object class?
+
+    - In Java, Object class is the root/parent class of all classes
+
+    - Every class automatically inherits from Object class if no explicit parent is specified
+
+    - Object class provides common methods like toString(), equals(), hashCode() that all objects can use
 
 - What is Object ?
 
@@ -140,7 +159,7 @@ Note: The finalize() method has been deprecated since Java 9. It is recommended 
 - Did variables ( non primitive data types ) declared as final allow modifications ?
 
     - Yes , modifications are allowed but re assigning is not allowed.
-
+    
 ```java
 class A{
     String name = "ABD";
@@ -154,6 +173,29 @@ class A{
         obj1 = new A() ; // re assigning is not allowed
 
     }
+}
+```
+
+- What happens when a class is declared as final ?
+
+    - It prevents that particular class to be inherited. 
+
+    - Declares all of it's method as final too. 
+
+    - Final methods can't be over ridden . 
+
+```java
+class Parent {
+    public final void show() {
+        System.out.println("This is a final method.");
+    }
+}
+
+class Child extends Parent {
+    // ❌ This will cause a compile-time error
+    // public void show() {
+    //     System.out.println("Trying to override.");
+    // }
 }
 ```
 
@@ -187,6 +229,10 @@ class A{
 
     - No , this belongs to an object whereas the static methods are not dependent on the object. Hence it's not possible.
 
+- Can we use ``` super ``` inside a static method ?
+
+    - No , static methods belongs to the class only and they don't have access to parent class
+
 - What is static blocks ?
 
     - Static blocks are inside a class that runs once , when the class is loaded into the memory.
@@ -202,13 +248,61 @@ class A{
 - What happens in a nested class ,when the inner class is declared as static ?
 
     - The inner class become independent of outer class. No need to create object for the outer class to access the inner class.
+- What is Singleton class ?
 
+    - Singleton class allows you to create only one object for the same class.
 
+    - No two objects of the same class are allowed
 
+## Inheritance 
 
+- It is the mechanism in Java by which one class is allowed to inherit the features(fields and methods) of another class. In Java, Inheritance means creating new classes based on existing ones.
 
+#### Q/A :- 
 
+- What are the things to be considered while inheriting ?
 
+    - While using the child class the parent class variable are need to be initialized 
+
+    - Even though it's a child class the it can't inherit the private variables and methods
+
+- A child class reference variable can't point to the parent class object ?
+
+    - No , ```subclass obj = new parentclass()``` is not possible.Because the obj may not have all the properties of the child class.
+
+- The variables / methods which can be accessed is determined by the reference variable and not by the object it referring to ?
+
+    - Yes, the variable / method that can be accessed is determined by the reference variable 
+
+### super 
+
+- What are the use cases of super ?
+
+    - Used to access the constructor of the parent class from the child class
+
+    - Used to access the variables of the parent class from the child class
+
+- What are the considerations during the inheritance ?
+
+    - When the parent class have the parameterized constructors , then the repective arguments should be passed to the parent class constructor from the child class constructor during the object creation.
+
+    - If no parameterized constructor , then we don't want to anything because the child class calls the default constructor of the the parent class.
+
+- What is upcasting ?
+
+    - The process of converting the child class object to the parent class object is known as upcasting and it's possible in java.
+
+    - But downcast is not possible in java.
+
+- What are the types of inheritance available in java ?
+
+    - Single inheritance , Multilevel inheritance , Herarical inheritance , Hybrid inheritance ( Single + multiple ), Multiple inheritance 
+
+    - Multiple inheritance is not possible in java. But can be implemented using interface 
+
+- Can a class can be it's own super class ?
+
+    - No , it's not possible.
 
 ## Polymorphism 
 
