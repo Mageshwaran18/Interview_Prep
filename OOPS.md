@@ -1,3 +1,96 @@
+## Prerequisites
+
+- What are Low-Level Languages and High-Level Languages?
+    - Low-level languages are close to hardware, harder to understand [Machine Language (Binary), Assembly Language]
+    - High-level languages are closer to human language; easier to write and read [Java, C++, Python]
+
+- What are the types of programming languages based on programming paradigm?
+    1. Procedural Languages
+        - Focus on functions and procedure calls
+        - Code is executed line by line
+        - Examples: C, Pascal
+
+    2. Object-Oriented Languages (OOP)
+        - Based on objects and classes
+        - Examples: Java, C++, Python
+
+    3. Functional Languages
+        - Treat computation as evaluation of functions
+        - Avoid changing state and mutable data
+        - Examples: Haskell, Lisp, Scala
+
+    4. Scripting Languages
+        - Used for automating tasks; often interpreted
+        - Examples: Python, JavaScript, Bash
+
+    5. Logic-Based Languages
+        - Based on formal logic
+        - Example: Prolog
+
+## What is OOP ?
+
+- OOP (Object-Oriented Programming) is a programming paradigm that organizes software design around objects rather than functions and logic.
+
+#### Q/A :-
+
+- What is Class ?
+
+    - A blueprint for creating objects. It defines properties (attributes) and behaviors (methods).
+
+- What is Object ?
+
+    - An instance of a class.
+
+- What is the use of ```new``` keyword ?
+    
+    - Dynamically allocates memory and returns a reference to it.
+
+- In the ``` classA a = new classA() ;``` which is excuted at which time ?
+
+    - ``` classA a ``` is executed  during the compile time.
+
+    - ``` new classA() ``` is executed during the run time.
+
+- What is constructor ?
+    
+    - Constructor is a special method that is automatically called when an object of a class is created.
+    
+    - Constructor has no return type and must have the same name as the class.
+
+- Can we add a explicit return type to the constructor ?
+    
+    - No. It makes that a method and not a constructor.
+
+- What is stack memory and heap memory ?
+    
+    - Stack memory -> Stores method-specific values, local variables, method calls, and primitive data types. It follows Last-In-First-Out (LIFO).
+
+    - Heap memory -> Stores objects and class instances, dynamically allocated memory. Garbage collection happens here.
+
+- What is primitive and non primitive data type ?
+
+    - Primitive -> Basic data types, stores values directly, stored in stack memory [byte, short, int, long, float, double, char, boolean].Primitive data types are not implemented as objects in java.
+    
+    - Non primitive -> Reference data types that store addresses of objects, stored in heap memory [String, Arrays, Classes, Interfaces, etc.]
+
+- What is stored in the non primitive data types ?
+
+    - They don't store the actual values directly , Instead they store a reference ( memory address ) that points to the actual values in a heap memory.
+
+- Among primitive and non primitive data type , which is passed by values ?
+
+    - Primitive data types are passed by value and non primitive data types are passed by reference. Java supports only call be value and not call by reference 
+
+
+
+
+
+
+
+
+
+
+
 ## Polymorphism 
 
 - Polymorphism allows the same method or object to behave differently based on the context, specifically on the project's actual runtime class.
@@ -32,7 +125,7 @@ Abstraction in Java is the process of hiding the implementation details and only
                 Traditionally (before Java 8), interfaces could only have abstract methods (implicitly public abstract) — no method bodies allowed.
                 No implementation, only method declarations — subclasses must implement all methods.
 
-![Abstraction Example](D:\Magesh\LLD\images\abstraction.png)
+![Abstraction Example](D:/Magesh/LLD/images/abstraction.png)
 
 ### Abstract Classes 
 
