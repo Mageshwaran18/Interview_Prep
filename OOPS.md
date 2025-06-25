@@ -657,9 +657,9 @@ Abstraction in Java is the process of hiding the implementation details and only
 
     - Yes, static methods in interface are not inherited but we can redeclare in the child class.
 
-- Can a static final method in a parent class be redeclared in its child class?
+- Can a method in interface be final ?
 
-    - No, static final methods in interface are not inherited and also final prevents that from being redeclared in the child class.
+    - No. In Java interfaces, methods are implicitly public and abstract (unless they're default or static)
 
 - Does interface have states?
 
