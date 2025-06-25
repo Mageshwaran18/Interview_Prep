@@ -62,6 +62,26 @@
 
     - Object class provides common methods like toString(), equals(), hashCode() that all objects can use
 
+- What is hashcode ?
+
+    - A method in java that returns a unique integer for an object.
+
+    - It's used in hash-based collections like HashMap, HashSet etc.
+
+- What is equals() ?
+
+    - String1 == String2 checks whether the two strings share the same memory locations but string1.equals(string2) checks whether the two strings are similar in content or not.
+
+    - A class which overrides equals() must also override hashCode() for consistency.
+
+- What is the difference between the == (equality) and .equals() ?
+
+    |== (equality)|equals()|
+    |--------------|--------|
+    |Compares memory addresses|Compares content|
+    |Can't be overridden|Can be overridden|
+    |Applicable for primitive data types|Not applicable for primitive data types|
+
 - What is toString() method ?
 
     - It's a method from the Object class which returns a string representation of the object. By default it returns a unique value (ex:- A@12345 -> classname@hashcode) if not overridden.
@@ -132,13 +152,27 @@ Note: The finalize() method has been deprecated since Java 9. It is recommended 
 
 ## Package 
 
-- What is package ?
-    
-    - A package in Java is a way to group related classes, interfaces, and sub-packages together.
+- A package in Java is a way to group related classes, interfaces, and sub-packages together.
 
-    - Think of it like a folder on your computer that organizes files.
+- Think of it like a folder on your computer that organizes files.
 
-    - You can't creat two classes with the same name in a single package.
+- You can't creat two classes with the same name in a single package.
+
+#### Q/A :- 
+
+- What are the packages available in java ?
+
+    - java.lang --> Default package. No need to import, contains classes like String, Math, Integer etc.
+
+    - java.io --> Input/output files, stream operations, BufferedReader etc.
+
+    - java.util --> Data structures, Collection frameworks
+
+    - java.awt --> GUI, buttons, frames 
+
+    - java.applet --> Small programs embedded in the web browser (Deprecated since Java 9)
+
+    - java.net --> Networking and internet communication operations such as Socket, URL etc.
 
 ## Keywords 
 
@@ -398,7 +432,14 @@ class Child extends Parent {
     - Slower when compared to the early binding because the JVM determines the method need to be executed during the run time.
 
     - Supported by the method overridding 
+
 ## Encapsulation 
+
+- In encapsulation we bind the data members and methods into a single unit ( class ) and restricting direct access to the data.
+
+- Encapsulation is used to hide the implementation part and show the functionality for better readability and usability. 
+
+- Encapsulation is achieved using the access modifiers.
 
 #### Q/A :- 
 
@@ -407,6 +448,63 @@ class Child extends Parent {
     - Only the inner class can be protected. Outermost class should always be public or default 
 
     - Outer class can't be private and protected.
+
+- What is difference between the protected and the public ?
+
+    - Within the same package:
+
+        - protected members can be accessed by:
+    
+            - The same class.
+
+            - Other classes in the same package, even if they are not subclasses.
+
+    - From a different package:
+
+        - protected members can only be accessed:
+
+            - Through inheritance → Only by subclasses.
+
+            - And even then, the subclass must access it through itself (i.e., this.protectedMember) — not via a parent class reference.
+
+            Example :-
+            ```java
+            // Package A
+            package A;
+            public class Parent {
+                protected int value = 10;
+            }
+
+            // Package B
+            package B;
+            import A.Parent;
+
+            public class Child extends Parent {
+                void show() {
+                    System.out.println(this.value);  // ✅ Allowed: accessed via inheritance
+                    // System.out.println(super.value); // ✅ Also allowed, still inherited
+                }
+            }
+
+            public class Another {
+                void test() {
+                    Parent p = new Parent();
+                    // System.out.println(p.value);  // ❌ Not allowed: not a subclass and different package
+                }
+            }
+            ```
+- Can we override the private methods ?
+
+    - Private methods are not inherited. Hence it's impossible to over ride them.
+
+|                          | **public** | **private** | **protected** | **default** |
+| ------------------------ | ---------- | ----------- | ------------- | ----------- |
+| *Same class*             | ✅          | ✅           | ✅             | ✅           |
+| *Same pack subclass*     | ✅          | ❌           | ✅             | ✅           |
+| *Same pack non-subclass* | ✅          | ❌           | ✅             | ✅           |
+| *Diff pack subclass*     | ✅          | ❌           | ✅             | ❌           |
+| *Diff pack non-subclass* | ✅          | ❌           | ❌             | ❌           |
+
 
 ## Abstraction
 
