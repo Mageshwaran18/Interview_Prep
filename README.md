@@ -1,7 +1,7 @@
-### Low Level System Design ###
+# Low Level System Design ###
 ---
 
-# SOLID Principles in Low-Level Design (LLD)
+## SOLID Principles in Low-Level Design (LLD)
 
 ## What is SOLID?
 
