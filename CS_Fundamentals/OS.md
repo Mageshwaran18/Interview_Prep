@@ -70,8 +70,7 @@
 | **Context Switching** | Between processes                      | Fast switch between user tasks               | Between processes on different CPUs      | Between threads in same process                     |
 | **Goal**              | Keep CPU busy while one waits          | Improve user experience (do many tasks)      | Increase performance using multiple CPUs | Efficient use of CPU within one process             |
 | **Concurrency**       | Yes, but limited (no true parallelism) | Yes, user sees multiple tasks running        | Yes, real parallelism                    | Yes, multiple threads run in parallel/logically     |
-| **Example Use Case**  | Batch systems (e.g., job queues)       | Using a text editor while listening to music | Scientific computing, servers            | Text editor , typing + 
-spell-check + autosave |
+| **Example Use Case**  | Batch systems (e.g., job queues)       | Using a text editor while listening to music | Scientific computing, servers            | Text editor , typing + spell-check + autosave |
 
     
 - What is context switching ? 
