@@ -188,53 +188,53 @@ What is the difference between the Process context switching and Thread context 
         - block() Used when a process can't proceed further ( if value if < 0). It moves the process into the waiting queue.
         - wakeup() It resumes the blocked process , moves the process from waiting queue to the ready state.
 
-- What is dining philosophers problem ? How to overcome them ? How it is related to the OS ?
+- Dining philosophers problem in depth !
 
-The **Dining Philosophers Problem** is a classic synchronization problem in Operating Systems. It models how to **share limited resources** (like CPU, memory, or files) **safely** between multiple processes without causing **deadlocks or starvation**.
+    The **Dining Philosophers Problem** is a classic synchronization problem in Operating Systems. It models how to **share limited resources** (like CPU, memory, or files) **safely** between multiple processes without causing **deadlocks or starvation**.
 
----
+    ---
 
-### 🧠 **Problem Setup**
+    ### 🧠 **Problem Setup**
 
-* Imagine **5 philosophers** sitting at a round table.
-* They do two things: **think** and **eat**.
-* There are **5 chopsticks**, one between each pair.
-* A philosopher needs **2 chopsticks to eat** (left and right).
+    * Imagine **5 philosophers** sitting at a round table.
+    * They do two things: **think** and **eat**.
+    * There are **5 chopsticks**, one between each pair.
+    * A philosopher needs **2 chopsticks to eat** (left and right).
 
-✅ Philosophers:
+    ✅ Philosophers:
 
-* **Think → Try to pick left chopstick → Try to pick right chopstick → Eat → Release both**
+    * **Think → Try to pick left chopstick → Try to pick right chopstick → Eat → Release both**
 
----
+    ---
 
-### ❌ **Problems That Can Occur**
+    ### ❌ **Problems That Can Occur**
 
-1. **Deadlock** – If all philosophers pick the left chopstick at the same time, they will all wait forever for the right one.
-2. **Starvation** – Some philosophers might never get to eat if others keep eating.
+    1. **Deadlock** – If all philosophers pick the left chopstick at the same time, they will all wait forever for the right one.
+    2. **Starvation** – Some philosophers might never get to eat if others keep eating.
 
----
+    ---
 
-### 💡 **Solutions to Avoid Issues**
+    ### 💡 **Solutions to Avoid Issues**
 
-1. **Allow only 4 philosophers to sit at once**
-   → At least one will always eat, avoiding deadlock.
+    1. **Allow only 4 philosophers to sit at once**
+    → At least one will always eat, avoiding deadlock.
 
-2. **Pick both chopsticks at once (atomic action)**
-   → If both aren’t available, don’t pick any.
+    2. **Pick both chopsticks at once (atomic action)**
+    → If both aren’t available, don’t pick any.
 
-3. **Use a waiter (monitor/semaphore)**
-   → A central controller gives permission to eat if both chopsticks are available.
+    3. **Use a waiter (monitor/semaphore)**
+    → A central controller gives permission to eat if both chopsticks are available.
 
-4. **Numbering and Order**
-   → Let odd philosophers pick left then right, and even ones pick right then left.
+    4. **Numbering and Order**
+    → Let odd philosophers pick left then right, and even ones pick right then left.
 
----
+    ---
 
-### 🧵 **Relation to OS**
+    ### 🧵 **Relation to OS**
 
-* Models **resource allocation** in OS
-* Philosophers = **Processes**,
-  Chopsticks = **Resources (like printers, files, memory)**
-* OS must avoid **deadlocks, race conditions, and starvation** when managing resources.
+    * Models **resource allocation** in OS
+    * Philosophers = **Processes**,
+    Chopsticks = **Resources (like printers, files, memory)**
+    * OS must avoid **deadlocks, race conditions, and starvation** when managing resources.
 
----
+    ---
