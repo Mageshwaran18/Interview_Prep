@@ -238,3 +238,30 @@ What is the difference between the Process context switching and Thread context 
     * OS must avoid **deadlocks, race conditions, and starvation** when managing resources.
 
     ---
+
+- What is deadlock ?
+
+    - Deadlock is a situation where one or more process wait for eachother to release the resource but none can proceed 
+    - All are stuck forever 
+
+- What are the condition required for the deadlock ?
+
+    - Mutual Exclusion - Only one process can handle the resoruce at a time.
+    - Hold and Wait - One process holds the resources and wait for the other resource 
+    - No preemption - A resource can't be taken forcefully 
+    - Circular wait - A circular chain of waiting processes .
+
+- What are the deadlock handling strategies ?
+
+    - Deadlock prevention - Make sure you atleast fail one of the 4 condition of deadlock.
+    - Deadlock avoidance - Make sure that resoruce allocation is safe. Use deadlock avoidance algorithms like Bankers Algorithm etc..
+    - Detection and recovery - Let the deadlock happens and provide recovery strategy like killing a process/releasing some of the resources 
+    - Ignore deadlock - Assume deadlock happens very rarely. Used in UNIX and Windows 
+
+- Bankers algorithm in short !
+
+    - It's a dead lock avoidance algorithm , where the system checks if granting resource will not affect the safe state of the system.
+
+    - If not, then the resource allocation will be denied to avoid dedalock.
+
+    - Bankers algorithm make sure that each process must declare max resource that they needed.
