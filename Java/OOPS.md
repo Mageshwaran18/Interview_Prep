@@ -74,6 +74,15 @@
 
     - A class which overrides equals() must also override hashCode() for consistency.
 
+- What is the difference between Initialization and Instantiation ?
+
+    - Instantiation 
+        - Creating an object from a class (allocating memory).
+        - Uses ```new``` keyword to create the object.
+    - Initialization 
+        - Assigning initial values to variables or objects.
+        - Happens after Instantiation 
+
 - What is the difference between the == (equality) and .equals() ?
 
     |== (equality)|equals()|
@@ -672,3 +681,8 @@ Abstraction in Java is the process of hiding the implementation details and only
 - What is the order of extend and implement in a class?
 
     - Class A extends B implements C. Extends comes before implements.
+
+- What is loose coupling using interface ?
+
+    - Loose coupling means classes depend on abstractions (interfaces) rather than concrete implementations.
+

@@ -1,12 +1,12 @@
 # Basics of LLD 
 
-- What is UML ?
+- # What is UML ?
 
     - UML (Unified Modeling Language) is a standardized way to visualize the design of a system. It helps you communicate your design clearly with others 
 
     - UML has many diagram types, but for LLD, the Class Diagram is the most important.
 
-- What is class diagram ?
+-  # What is class diagram ?
 
     - It shows the structure of the system. It focuses on 
         - Classes (blueprints of objects)
@@ -16,7 +16,7 @@
         - Methods (functions/behaviors)
 
         - Relationships between classes
-- What does a class diagram look like?
+- # What does a class diagram look like?
 
       - A box divided into three parts:
           - Top part contains the class name
@@ -29,7 +29,18 @@
       - Abstract classes and methods are shown in italics
       - If it's a interface it's declared as <<Interface_Name>>
 
-- Explain Association 
+- # What is the difference between LLD and HLD?
+
+    - HLD 
+        - Focuses more on how the entire system is working and its components
+        - Includes Frontend, Backend, API calls between them, Load Balancing 
+    
+    - LLD 
+        - Focuses more on the implementation of each component 
+        - Includes the relationships between classes, objects, attributes etc.
+
+
+- # Explain Association 
 
     - It's the simplest relationship exists between two classes. Which says that whether Class A can access Class B OR Class A have the reference to the Class B .
 
@@ -193,7 +204,7 @@
     | Multiplicity     | Number of instances allowed on each end                 |
    
 
-- Explain Aggregation and Composition 
+# Explain Aggregation and Composition 
     **Aggregation** and **Composition**, both of which are special types of **Association**, commonly referred to as **“Has-A”** relationships.
 
     ---
@@ -329,7 +340,7 @@
     House ◆------ Room        ← Composition (can't exist without)
     ```
 
-- Explain Inheritance and Interface 
+- # Explain Inheritance and Interface 
 
     These are fundamental in object-oriented design and often come up in system design and interviews.
 
@@ -506,3 +517,10 @@
     * **Dependency** is weaker than association — no attribute reference, only short-term use.
     * **Aggregation vs Composition** is mainly about **lifetime coupling**.
     * **Inheritance** and **Interface implementation** form the **"is-a"** and **"can-do"** relationships, respectively.
+
+- Why composition is preferred over the inheritance ?
+    
+    - Composition allows us to change the behavior of an object dynamically by replacing components at runtime.
+    - Inheritance makes it difficult to modify an existing class hierarchy without breaking existing code
+    - Inheritance can lead to deep class hierarchies, making maintenance difficult.
+    - It enforces strict parent-child relationships, which can be too rigid for some designs.
