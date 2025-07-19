@@ -50,71 +50,71 @@
 
 ### O - Open/Closed Principle 
 
-        - This principle states that Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification which means you should be able to extend a class behavior, without modifying it.
+    - This principle states that Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification which means you should be able to extend a class behavior, without modifying it.
 
-        - Why it matters ?
-            - Prevents breaking the existing code.Because
-                - Modification may bring bugs.
-                - Can break the existing features.
-            - Encourages the reusable components and code.
+    - Why it matters ?
+        - Prevents breaking the existing code.Because
+            - Modification may bring bugs.
+            - Can break the existing features.
+        - Encourages the reusable components and code.
 
-        Example: Consider a class Shape with a printArea() method that calculates the area of various shapes. If we directly modify the Shape class's printArea() method every time we add a new shape, we violate the Open/Closed Principle by changing existing code.
+    Example: Consider a class Shape with a printArea() method that calculates the area of various shapes. If we directly modify the Shape class's printArea() method every time we add a new shape, we violate the Open/Closed Principle by changing existing code.
 
-        Instead, we should create an abstract class Shape with an abstract method printArea(). This way, any new shape can extend the Shape class and implement its own printArea() method without modifying the existing code. This approach follows the Open/Closed Principle by being open for extension (new shapes) but closed for modification (existing code remains unchanged).
-    
+    Instead, we should create an abstract class Shape with an abstract method printArea(). This way, any new shape can extend the Shape class and implement its own printArea() method without modifying the existing code. This approach follows the Open/Closed Principle by being open for extension (new shapes) but closed for modification (existing code remains unchanged).
+
 ### Liskov Substitution Principle (LSP)
-        - A child class should be substitutable for its parent class without changing the correctness of the program.
+    - A child class should be substitutable for its parent class without changing the correctness of the program.
 
-        - In simple terms:
-        If class B is a subclass of class A, you should be able to use B wherever A is expected, and the program should still work correctly.
+    - In simple terms:
+    If class B is a subclass of class A, you should be able to use B wherever A is expected, and the program should still work correctly.
 
-        - Why it matters ?
-            - Ensures reliability when using polymorphism.
-            - Avoids unexpected behaviors in subclass implementations.
-        
-        Example: Consider a class Vehicle with a method startEngine(). Subclasses like Bike and Car can extend the Vehicle class without any changes in the parent class and can call the startEngine() method. However, if a Bicycle class extends the Vehicle class, it can't access startEngine() method since bicycles don't have engines. This would require explicitly handling that edge case by adding a different implementation or throwing an exception, which leads to undetermined behavior while using the child class implementation. Thus, the Bicycle class (child class) can't substitute the parent class (Vehicle class).
+    - Why it matters ?
+        - Ensures reliability when using polymorphism.
+        - Avoids unexpected behaviors in subclass implementations.
+    
+    Example: Consider a class Vehicle with a method startEngine(). Subclasses like Bike and Car can extend the Vehicle class without any changes in the parent class and can call the startEngine() method. However, if a Bicycle class extends the Vehicle class, it can't access startEngine() method since bicycles don't have engines. This would require explicitly handling that edge case by adding a different implementation or throwing an exception, which leads to undetermined behavior while using the child class implementation. Thus, the Bicycle class (child class) can't substitute the parent class (Vehicle class).
 
-        To overcome this, we can create two abstract classes: EngineVehicle and NonEngineVehicle, such that we can properly separate these different types of vehicles and maintain the Liskov Substitution Principle.
+    To overcome this, we can create two abstract classes: EngineVehicle and NonEngineVehicle, such that we can properly separate these different types of vehicles and maintain the Liskov Substitution Principle.
 
 ### Interface Segregation Principle 
 
-            - It states that clients should not be forced to depend on interfaces they don't use. In other words, keep interfaces small and specific rather than large and general.
+        - It states that clients should not be forced to depend on interfaces they don't use. In other words, keep interfaces small and specific rather than large and general.
 
-            - Key points:
-                - Break large interfaces into smaller, more focused ones
-                - Classes should only implement the methods they need
-                - Interfaces should be client-specific, not general-purpose
-                - Avoid "fat" interfaces that force classes to implement unnecessary methods
-            
-            - Why it matters ?
-
-                - Reduces unnecessary dependencies.
-                - Simplifies implementation for specific use cases.
-                - Make sure the class implements only what they actually needed.
-
-            - Example: Consider a Printer interface with abstract methods like print(), scan(), fax(). Any class implementing the Printer interface must implement all these functions. But what if we need a SimplePrinter class which only needs printing functionality without scanning and faxing?
-
-            If SimplePrinter implements the Printer interface, it would be forced to implement unnecessary scan() and fax() methods. To follow ISP, we should create separate interfaces like IPrinter, IScanner, and IFax. This way SimplePrinter can implement just IPrinter, while a SuperPrinter can implement all three interfaces.
-                
-### Dependency Inversion Principle 
+        - Key points:
+            - Break large interfaces into smaller, more focused ones
+            - Classes should only implement the methods they need
+            - Interfaces should be client-specific, not general-purpose
+            - Avoid "fat" interfaces that force classes to implement unnecessary methods
         
-        - The Dependency Inversion Principle (DIP) is a principle in object-oriented design that states that High-level modules should not depend on low-level modules. Both should depend on abstractions
-
-        - In simpler terms, the DIP suggests that classes should rely on abstractions (e.g., interfaces or abstract classes) rather than concrete implementations.
-
         - Why it matters ?
 
-            - Promotes decoupled architecture.
-            - Supports testing and maintainability 
-        
-        - Example :- 
-            Imagine you have a Switch that turns on a LightBulb.
+            - Reduces unnecessary dependencies.
+            - Simplifies implementation for specific use cases.
+            - Make sure the class implements only what they actually needed.
 
-            If the Switch is directly connected to the LightBulb class, it only works with LightBulb. If later you want the same switch to control a Fan, you have to change the Switch code. That’s bad.
+        - Example: Consider a Printer interface with abstract methods like print(), scan(), fax(). Any class implementing the Printer interface must implement all these functions. But what if we need a SimplePrinter class which only needs printing functionality without scanning and faxing?
 
-            To fix this and follow DIP:
-            Create an interface called Switchable with methods like turnOn() and turnOff().Both LightBulb and Fan will implement this interface.
-            Now the Switch depends on the interface, not the actual device.So, you can pass any device (LightBulb, Fan, etc.) to the Switch without changing its code.
+        If SimplePrinter implements the Printer interface, it would be forced to implement unnecessary scan() and fax() methods. To follow ISP, we should create separate interfaces like IPrinter, IScanner, and IFax. This way SimplePrinter can implement just IPrinter, while a SuperPrinter can implement all three interfaces.
+            
+### Dependency Inversion Principle 
+    
+    - The Dependency Inversion Principle (DIP) is a principle in object-oriented design that states that High-level modules should not depend on low-level modules. Both should depend on abstractions
+
+    - In simpler terms, the DIP suggests that classes should rely on abstractions (e.g., interfaces or abstract classes) rather than concrete implementations.
+
+    - Why it matters ?
+
+        - Promotes decoupled architecture.
+        - Supports testing and maintainability 
+    
+    - Example :- 
+        Imagine you have a Switch that turns on a LightBulb.
+
+        If the Switch is directly connected to the LightBulb class, it only works with LightBulb. If later you want the same switch to control a Fan, you have to change the Switch code. That’s bad.
+
+        To fix this and follow DIP:
+        Create an interface called Switchable with methods like turnOn() and turnOff().Both LightBulb and Fan will implement this interface.
+        Now the Switch depends on the interface, not the actual device.So, you can pass any device (LightBulb, Fan, etc.) to the Switch without changing its code.
 
 
 ## DRY Principle 
