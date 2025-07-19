@@ -34,19 +34,19 @@
 
 ### S - Single Responsibility Principle 
 
-        - Every class should have a single responsibility or single job or single purpose. In other words, a class should have only one job or purpose within the software system.
+    - Every class should have a single responsibility or single job or single purpose. In other words, a class should have only one job or purpose within the software system.
 
-        - Why?
-            Improves Maintainability:
-                - Changes in one part of the system have minimal impact on others 🔄
-            Enhances readability and reduces complexity
+    - Why?
+        Improves Maintainability:
+            - Changes in one part of the system have minimal impact on others 🔄
+        Enhances readability and reduces complexity
 
-        Example: Consider a Baker class, the class should only perform actions related to baking such as preparing dough, operating ovens, and decorating pastries - not other tasks like inventory management or customer service.
-        We can specify an separate class for those things.
+    Example: Consider a Baker class, the class should only perform actions related to baking such as preparing dough, operating ovens, and decorating pastries - not other tasks like inventory management or customer service.
+    We can specify an separate class for those things.
 
-        If it handles multiple unrelated responsibilities, it violates the Single Responsibility Principle. And makes the system monolithic 
+    If it handles multiple unrelated responsibilities, it violates the Single Responsibility Principle. And makes the system monolithic 
 
-        This coupling of unrelated responsibilities increases the risk of introducing bugs and makes the codebase more difficult to maintain. Reduces readability and increases the complexity.
+    This coupling of unrelated responsibilities increases the risk of introducing bugs and makes the codebase more difficult to maintain. Reduces readability and increases the complexity.
 
 ### O - Open/Closed Principle 
 
