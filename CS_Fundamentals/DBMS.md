@@ -35,6 +35,13 @@
         - Used when a relationship itself has an attribute or participates in another relationship.
         - "Employee works on Project" → This whole thing can link to Client.
         - So, Client hires this (Employee–Project) team.
+        - So, we use Aggregation:
+        - Create aggregation:
+            - (Employee — Works_On — Project) → treat this as a single unit
+            - Now link:
+                - Manager — Supervises — Aggregated(Works_On)
+
+
 
 - What are the steps to draw an ER model ?
 
@@ -59,7 +66,7 @@
 - Define the terms in the Relational model 
 
     - Tables - Relations.
-    - Row - Tubles / record.
+    - Row - Tuples / record.
     - Column - Attribute.
     - Domain - What are the types of data that column can hold.
     - Degree - No of columns in the table.
