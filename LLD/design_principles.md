@@ -216,22 +216,41 @@
         • The interviewer stresses that the focus is on meeting current requirements without unnecessary complexity.
 
         However, instead of sticking to the given requirements, you decide to implement support for PayPal and cryptocurrency payments, assuming they might be needed in the future.
-
-    - Why it matters ?
-
+        
+    - Why it matters?
         - Follow only the requirements 
         - Prevents over engineering 
         - Saves time and resources 
-        - Alligns best for the agile technologies.
-    
-    - How to implement ?
+        - Alligns best for the agile technologies
 
+    - How to implement?
         - Have a clear set of goals and requirements 
         - Always track your progress 
         - Refuse if it doesn't fit for the solution
 
-    - Disadvantages :- 
-
+    - Disadvantages:
         - Difficulty in estimation 
         - Incomplete or ineffecient solutions
         - Team co-ordination issues
+
+- What is design principles and design pattern?
+
+    🧱 Design Principles
+        → These are general rules or guidelines to write good, maintainable, and flexible code.
+        ✅ They guide how to think when designing software.
+
+        📘 Example:
+            - SOLID principles
+            - DRY (Don't Repeat Yourself)
+            - KISS (Keep It Simple, Stupid)
+
+    🧩 Design Patterns
+        → These are proven solutions to common design problems — reusable templates you can apply.
+        ✅ They are like ready-made strategies built using design principles.
+
+        📘 Example:
+            - Singleton
+            - Factory
+            - Observer
+            - Strategy
+
