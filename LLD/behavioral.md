@@ -18,3 +18,24 @@
     - Advantage :- 
         - Select behavior during the runtime 
         - Flexible switching between the objects
+
+## State Design Patterns 
+
+    - Managing a state of an object. Different states of an object provides different behaviors when the internal state of the object changes.
+
+    - State design patterns allows you to encapsulate the state specific behavior into separate classes.
+
+    Ex:- Real Word traffic light system.
+
+    Components :- 
+
+        * State Interface ( TrafficLightState ) [method to change the state using the trafficlight context , some SOP ]
+
+        * Concrete states ( redState, yellowState , greenState) [ State specific behaviour ]
+        
+        * Context class ( TrafficLigthContext )
+
+        * Driver code.
+
+    ![Class Diagram](../../CS_Fundamentals/images/state_design_pattern.png)
+    
