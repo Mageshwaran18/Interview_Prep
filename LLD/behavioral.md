@@ -37,5 +37,5 @@
 
         * Driver code.
 
-    ![Class Diagram](../../CS_Fundamentals/images/state_design_pattern.png)
+![Class Diagram](../../CS_Fundamentals/images/state_design_pattern.png)
     
