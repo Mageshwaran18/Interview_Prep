@@ -193,6 +193,113 @@
 - Non-Trivial dependency 
     - X->Y is not trivial where Y is not the subset of X
 
+## SQL 
+
+### Commit & Rollback 
+
+    - Works after the 'START TRANSACTION' 
+
+    - Commit -> Save all the changes made during the transactions 
+    - Rollback -> Revoke all the changes made during the transactions
+    
+    ```sql 
+    START TRANSACTION
+
+    UPDATE Accounts SET balance = balance - 100 WHERE id = 10;
+
+    COMMIT/ROLLBACK;
+    ```
+
+### Grant and Revoke 
+    - These are data control languages 
+    - GRANT -> Provide privileges to the user
+
+    ```sql 
+
+    CREATE USER <user_name>@<host>
+    IDENTIFIED BY <pwd>
+
+    GRANT SELECT , INSERT ON <data_base>.<table_name>
+    TO <user_name>@<host>
+
+    FLUSH privileges 
+
+    REVOKE SELECT , INSERT ON <data_base>,<table_name>
+    FROM <user_name>@<host>
+
+    FLUSH privileges
+    ```
+
+    FLUSH privileges is used to reload the GRANT table in the MySQL
+
+## Slowly Changing Dimensions 
+
+    - A method used in the database to keep track of the data which changes over the time.
+
+    EX:- A user changes from one location to the another location 
+
+    - TYPE 1 :- Just overwrite the oldone 
+        - No history is maintained / old data can't be retrieved 
+    - TYPE 2 :- Add new column which keeps tracks of the versioning details 
+        - History is maintained / old data can be retrieved 
+    - TYPE 3 :- Add a new column which keeps track of only just previous value 
+        - A partial history is maintained.
+
+### Stored Procedure 
+    - A set of SQL statements that can be saved and reused when required.
+    - Provides encapsulation and optimize the query performance 
+
+    ``` sql 
+    DELIMITER $$ 
+
+    CREATE PROCEDURE <procedure_name>
+    
+        BEGIN 
+            <Statements>
+        END $$
+
+    DELIMITER ;
+
+    CALL procedure_name;
+    ```
+    - Delimiter tells the SQL where the command actually ends
+
+## Triggers 
+    - A set of operations get executed automatically in response to a certain DML event happens such as Insertion , Deletion , Updation.
+
+    ```sql 
+
+    DELIMITER $$
+
+    CREATE TRIGGER <trigger_name>
+
+        AFTER Insert ON <table_name>
+        FOR EACH ROW
+
+            BEGIN 
+                <Statements>
+            END $$
+    
+    DELIMITER ;
+    ```
+
+## Events 
+
+    - Events are tasks that run/executed by the user defined schedules 
+
+    ```sql
+
+    DELIMITER $$
+
+    CREATE EVENT <event_name>
+        ON SCHEDULE EVERY 1 MINUTE DO 
+            BEGIN 
+                <Statements>
+            END $$
+
+    DELIMITER ;
+    ```
+
 ## Query Optimization       
 
 - Improve performance and efficiency of the database in the context of response time, low power and memory consumptions
@@ -215,10 +322,33 @@
 - **Monitor Query performance**
     - Using EXPLAIN and Analyze 
 
+    #### Explain
+    ```sql
+    EXPLAIN 
+    SELECT id FROM Employee WHERE index_id = 1;
+    ```
+
+        - Shows the query execution plan without actually executing the query .
+        - Helps to understand how the database is being accessed with indexing and join.
+    
+    #### Explain Analyze 
+    ```sql
+    EXPLAIN ANALYZE 
+    SELECT id FROM Employee WHERE index_id = 1;
+    ```
+        - Shows the query execution plan by actually running the query
+        - It includes number of rows processed , time taken for each step.
+
+
+
 ## Indexing 
 
 - A data structure technique implemented to speed up the data retrieval operation on a database table by minimizing the number of disk accesses 
 - Comes with the additional cost on writing and storage space for the indexing 
+
+```sql
+CREATE INDEX <index_name> ON <column_name>
+```
 
 ```
 Structure of Index:
@@ -291,3 +421,40 @@ Search Key : Data Reference
 ### Applications of B and B+ trees 
 - **Databases**: Databases like MySQL and PostgreSQL use B+ Trees for fast query performance
 - **Search Engines**: B+ Trees index web pages by keywords for quick retrieval
+## Partitioning 
+
+- Partitioning means splitting a large table into smaller parts (partitions) to improve performance and manageability.
+- Data is divided logically, but stored separately
+- Queries can skip partitions, making reads faster
+- Each partition can be indexed, managed, or stored independently
+
+```sql
+CREATE TABLE Sales (
+    id INT,
+    sale_date DATE
+)
+PARTITION BY RANGE (YEAR(sale_date)) (
+    PARTITION p2022 VALUES LESS THAN (2023),
+    PARTITION p2023 VALUES LESS THAN (2024)
+);
+```
+
+### Types of partitioning 
+- **List Partitioning**
+        - Partitions data based on specific values in a column.
+        - You manually define which values go into which partition.
+        ```sql
+        PARTITION BY LIST (region) (
+            PARTITION p_north VALUES IN ('North'),
+            PARTITION p_south VALUES IN ('South')
+        );
+        ```
+
+- **Hash Partitioning**
+        - Partitions data using a hash function on a column's value.
+        - Values are automatically distributed across partitions.
+        - It works only on the integer based columns 
+        ```sql
+        PARTITION BY HASH(user_id)
+        PARTITIONS 4;
+        ```
