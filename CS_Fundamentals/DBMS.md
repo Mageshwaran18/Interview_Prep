@@ -213,7 +213,138 @@
 - Non-Trivial dependency 
     - X->Y is not trivial where Y is not the subset of X
 
-## SQL 
+## SQL
+
+Structured Query Language used to retrieve data from the Relational database, whereas MySQL is a database which uses SQL as its querying language.
+
+## Transactions
+
+A sequence of SQL operations that are executed as a single unit to ensure ACID properties:
+- **A - Atomic**: All or nothing
+- **C - Consistency**: One state to another state
+- **I - Isolation**: Transactions don't interfere with each other
+- **D - Durability**: Once committed everything is permanent
+
+### SQL Language Categories
+- **TCL** - Transaction Control Language: Commit, Rollback, Savepoint
+- **DDL** - Data Definition Language: Create, Alter, Drop, Truncate, Rename
+- **DML** - Data Manipulation Language: Select, Insert, Update, Delete
+- **DCL** - Data Control Language: Grant, Revoke
+
+## Basic SQL Commands
+
+```sql
+SHOW DATABASE;
+
+CREATE DATABASE <database_name>;
+
+CREATE TABLE <table_name>
+(
+    column_name1 <data_type>,
+    column_name2 <data_type>
+);
+
+-- Value must match the data type of the column
+INSERT INTO <table_name> (column1, column2) VALUES (value1, value2); 
+
+UPDATE <table_name> SET column1 = value1 WHERE <condition>;
+
+-- Without WHERE condition all rows will be deleted
+DELETE FROM <table_name> WHERE <condition>;
+```
+
+## Table Operations
+
+### TRUNCATE
+- Deletes all rows from the table but maintains the schema
+- Faster than DELETE
+- Resets the AUTO INCREMENT
+
+### DROP
+- Drops the entire table and the rows present in it including its schema
+- Cannot be undone
+
+## Different Ways to Create Tables
+
+### CTAS - Create Table as Select
+A table is created from the result of a SELECT query, but doesn't contain the PK and FK
+
+```sql
+-- Create new table
+CREATE TABLE <table_name> AS SELECT COL1, COL2 FROM <existing_table> WHERE <condition>;
+
+-- Insert into table 
+INSERT INTO <table_name> SELECT COL1, COL2 FROM <existing_table> WHERE <condition>;
+```
+
+### Temporary Table
+A table that exists only during the session, best suitable for intermediate calculations
+
+```sql
+CREATE TEMPORARY TABLE <table_name>
+(
+    col1 <data_type>,
+    col2 <data_type>
+);
+```
+
+### CTE - Common Table Expression
+Temporary table that is available just for the next query.
+
+```sql
+WITH CTE1 AS (
+    SELECT C1, C2 FROM Table WHERE <condition>
+)
+
+SELECT * FROM CTE1; -- CTE1 is available 
+SELECT * FROM CTE1; -- Error: CTE1 doesn't exist
+```
+
+## Window Functions
+
+Window functions in SQL perform calculations on a set of rows that are related to the current row without changing the number of rows in the result set.
+
+### Advantages
+- No extra joins/subquery required
+- Faster on larger tables
+- Cleaner syntax for analytical purposes
+
+### Types of Window Functions
+
+#### Aggregation Functions
+- AVG(), SUM(), MIN(), MAX(), COUNT()
+
+#### Ranking Functions
+Ranking provides a rank/position to each row within a partition based on ordering
+
+- **ROW_NUMBER()**: Doesn't care about ties, assigns unique rank for each row in the partition
+- **RANK()**: Assigns unique rank, tie rows get the same rank but skips the next rank
+- **DENSE_RANK()**: Assigns unique rank, tie rows get the same rank but doesn't skip the next rank
+- **PERCENT_RANK()**: Calculates the relative rank of a row in a partition expressed as decimal between 0 to 1
+  - Percent rank of row = (rank-1) / (total rows in partition-1)
+- **NTILE(n)**: Divides the result into approximately equal parts and assigns tile number to each row
+
+#### Value Functions
+Used to retrieve values from:
+- **LAG()**: Previous rows
+- **LEAD()**: Next rows
+- **FIRST_VALUE()**: First value in the partition
+- **LAST_VALUE()**: Last value in the partition
+- **NTH_VALUE(n)**: Gets the nth value from the partition
+
+## Set Operations
+
+### UNION
+- Combines one or more SELECT statements
+- Removes duplicates from the result
+- Each select statement should have equal number of columns with compatible datatypes
+- Columns must be in the same order
+- Final result takes column names from the first select statement
+
+### UNION ALL
+- Works same as UNION but allows duplications
+- Faster than UNION as it doesn't remove duplicates
+- Final result takes column names from the first select statement
 
 ### JOINS
 Joins establish relationships between two tables. Any column that can represent a relationship between tables can be used as the join condition, not just primary or foreign keys.
@@ -226,7 +357,7 @@ Joins establish relationships between two tables. Any column that can represent 
 - **Left Exclusive Join**: Include everything from left table but exclude rows common to both tables 
 - **Right Exclusive Join**: Include everything from right table but exclude rows common to both tables
 - **Full Exclusive Join**: Include everything but exclude rows common to both tables 
-- **Cross Join**: Cartesian product of two tables, resulting in n*n rows
+- **Cross Join**: Cartesian product of two tables, resulting in n*n rows, Cross join can work with and without **ON Condition**
 - **Self Join**: A table joining with itself using a join condition
     - There is no specific keyword as SELF JOIN
     - Example:
