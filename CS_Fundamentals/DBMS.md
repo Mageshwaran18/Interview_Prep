@@ -192,3 +192,102 @@
         
 - Non-Trivial dependency 
     - X->Y is not trivial where Y is not the subset of X
+
+## Query Optimization       
+
+- Improve performance and efficiency of the database in the context of response time, low power and memory consumptions
+
+### Ways of Query Optimization 
+- **Indexing**
+    - Speed up the search and retrieval queries 
+    - Index columns on the frequently used columns in the operations like WHERE, ORDER BY, JOIN, GROUP BY 
+- **Avoid using Wildcards at the beginning of LIKE** 
+    - It reduces the functionality of the Indexing 
+- **Avoid performing functions on the indexed columns** 
+    - Reduces the efficiency of the indexing 
+- **Avoid SELECT *** 
+    - Can slow down operations
+- **Use proper joins** 
+- **Use EXISTS instead of IN (while checking the presence)**
+    - Because EXISTS stops when the match is found but IN will perform a full table scan 
+- **Use joins instead of subqueries** 
+- **Use TOP and LIMIT**
+- **Monitor Query performance**
+    - Using EXPLAIN and Analyze 
+
+## Indexing 
+
+- A data structure technique implemented to speed up the data retrieval operation on a database table by minimizing the number of disk accesses 
+- Comes with the additional cost on writing and storage space for the indexing 
+
+```
+Structure of Index:
+Search Key : Data Reference 
+```
+
+- Search Key is the key (present in the table) we used to search in the table
+- Data references are the collections of pointers that point to the disk block where the value of the key is stored
+
+### Need for Indexing
+- Faster Search operations 
+- Efficient Query Processing 
+- Improved sorting 
+
+### Types of Indexing 
+- **Primary Index**
+    - Indexing performed on the primary key column 
+    - Types of primary index:
+        - **Dense Index**
+            - Every primary key will have its own index for faster retrieval 
+            - Additional storage space for the storage of indexing 
+        - **Sparse Index**
+            - Every row / primary key will not have its own separated indexing 
+            - Instead couple of range is being selected for the primary key and for every range the indexing is performed 
+- **Secondary Index** 
+    - Indexing which are performed on the non-primary columns 
+- **Multi-level Secondary Index** 
+    - While using the sparse indexing the ranges are subdivided into another range to create a secondary level of indexing
+    - Reducing the search space and size a little bit 
+    - When using sparse indexing, we don't index every record — only certain ranges
+    - To improve efficiency, these ranges are further subdivided to form a second level of indexing
+    - This creates a hierarchical structure (like index on index)
+- **Clustered Index** 
+    - More than one columns are grouped together to get the unique values and indexing performed on that group of columns 
+- **Ordered Index** 
+    - Ordered Index are the index which stores the index in the sorted order making sure that retrieval and search is faster as they were sorted/ordered frequently
+
+### Disadvantages of Indexing
+- Increased storage space 
+- Slower write operation
+- High maintenance complexity 
+
+## B and B+ Trees 
+
+- In DBMS efficient data storage and retrieval are very important. B and B+ trees enable that by fastening the process of insertion, deletion, searching operations
+- Both the B and B+ trees are self-balancing trees 
+
+### B Trees    
+- Self-balanced trees allow operations like searching, adding, removing and accessing data quickly 
+
+**Properties**
+- Each node can have M children and M-1 keys
+- Non-root and non-leaf nodes can have at least M/2 children
+- All leaves are at the same level 
+- Keys within the nodes are sorted and used as a guiding search 
+- Nodes are added only at the leaf nodes
+- **Data can be found in both the internal and leaf nodes**
+- **Requires less memory compared to the B+ Trees**
+
+### B+ Trees 
+- It's extended version of the B trees, where all the keys are stored at leaf level and internal nodes are only used to store the keys which is used for guiding purposes 
+
+**Properties**
+- Each node can have M children and M-1 keys
+- Non-root and non-leaf nodes can have at least M/2 children
+- All leaves are at the same level 
+- **Only the leaf node contains the data**
+- **Requires more memory compared to the B trees**
+
+### Applications of B and B+ trees 
+- **Databases**: Databases like MySQL and PostgreSQL use B+ Trees for fast query performance
+- **Search Engines**: B+ Trees index web pages by keywords for quick retrieval
