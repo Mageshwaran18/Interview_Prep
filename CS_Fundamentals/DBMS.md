@@ -155,6 +155,26 @@
 - It's a process in which we organize the data in such a way to reduce data redundancy (duplications) and improve data consistency.
 - It involves dividing a database into two or more tables.
 
+#### 1NF 
+    - The row order shouldn't tell any informations 
+    - The table should have the primary key 
+    - The columns need to be atomic not multivalued 
+#### 2NF 
+    - Follow 1NF
+    - No partial Dependencies 
+    - All non-key attributes should depend on the entire primary key 
+#### 3NF 
+    - Follow 2NF
+    - No transitive dependency 
+    - All non-key attributes should depend only on the primary key not on any other non-key attributes
+#### 4NF 
+    - Follow 3NF
+    - All the multivalued attributes should depend on the entire primary key regardless of other attributes
+#### 5NF 
+    - No joint dependency.
+    - A table can't be described as a join result of some other tables together.
+    - A table can't be splitted into smaller tables.
+
 ### Effects of data redundancy
 
 - When we have same set of data for the same set of columns, it leads to anomalies (data inconsistency)
@@ -195,168 +215,179 @@
 
 ## SQL 
 
-### Commit & Rollback 
+### JOINS
+Joins establish relationships between two tables. Any column that can represent a relationship between tables can be used as the join condition, not just primary or foreign keys.
 
-    - Works after the 'START TRANSACTION' 
+- **Inner Join**: Include only common rows 
+- **Left Join**: Include everything from left and common from right
+- **Right Join**: Include everything from right and common from left
+- **Full Outer Join**: Includes everything from the two tables
+    - SQL doesn't directly support full join, use UNION instead
+- **Left Exclusive Join**: Include everything from left table but exclude rows common to both tables 
+- **Right Exclusive Join**: Include everything from right table but exclude rows common to both tables
+- **Full Exclusive Join**: Include everything but exclude rows common to both tables 
+- **Cross Join**: Cartesian product of two tables, resulting in n*n rows
+- **Self Join**: A table joining with itself using a join condition
+    - There is no specific keyword as SELF JOIN
+    - Example:
+        ```sql
+        SELECT A.name AS Employee, B.name AS Manager
+        FROM Employees A
+        JOIN Employees B
+        ON A.manager_id = B.id;
+        ```
+    - Self join without a join condition will result in a cartesian product
 
-    - Commit -> Save all the changes made during the transactions 
-    - Rollback -> Revoke all the changes made during the transactions
-    
-    ```sql 
-    START TRANSACTION
+### Commit & Rollback
+Works after the 'START TRANSACTION' statement:
 
-    UPDATE Accounts SET balance = balance - 100 WHERE id = 10;
+- **Commit**: Save all the changes made during the transaction 
+- **Rollback**: Revoke all the changes made during the transaction
+        
+```sql 
+START TRANSACTION;
 
-    COMMIT/ROLLBACK;
-    ```
+UPDATE Accounts SET balance = balance - 100 WHERE id = 10;
 
-### Grant and Revoke 
-    - These are data control languages 
-    - GRANT -> Provide privileges to the user
+COMMIT; -- or ROLLBACK;
+```
 
-    ```sql 
+### Grant and Revoke
+These are data control language (DCL) commands:
 
-    CREATE USER <user_name>@<host>
-    IDENTIFIED BY <pwd>
-
-    GRANT SELECT , INSERT ON <data_base>.<table_name>
-    TO <user_name>@<host>
-
-    FLUSH privileges 
-
-    REVOKE SELECT , INSERT ON <data_base>,<table_name>
-    FROM <user_name>@<host>
-
-    FLUSH privileges
-    ```
-
-    FLUSH privileges is used to reload the GRANT table in the MySQL
-
-## Slowly Changing Dimensions 
-
-    - A method used in the database to keep track of the data which changes over the time.
-
-    EX:- A user changes from one location to the another location 
-
-    - TYPE 1 :- Just overwrite the oldone 
-        - No history is maintained / old data can't be retrieved 
-    - TYPE 2 :- Add new column which keeps tracks of the versioning details 
-        - History is maintained / old data can be retrieved 
-    - TYPE 3 :- Add a new column which keeps track of only just previous value 
-        - A partial history is maintained.
-
-### Stored Procedure 
-    - A set of SQL statements that can be saved and reused when required.
-    - Provides encapsulation and optimize the query performance 
-
-    ``` sql 
-    DELIMITER $$ 
-
-    CREATE PROCEDURE <procedure_name>
-    
-        BEGIN 
-            <Statements>
-        END $$
-
-    DELIMITER ;
-
-    CALL procedure_name;
-    ```
-    - Delimiter tells the SQL where the command actually ends
-
-## Triggers 
-    - A set of operations get executed automatically in response to a certain DML event happens such as Insertion , Deletion , Updation.
-
-    ```sql 
-
-    DELIMITER $$
-
-    CREATE TRIGGER <trigger_name>
-
-        AFTER Insert ON <table_name>
-        FOR EACH ROW
-
-            BEGIN 
-                <Statements>
-            END $$
-    
-    DELIMITER ;
-    ```
-
-## Events 
-
-    - Events are tasks that run/executed by the user defined schedules 
-
-    ```sql
-
-    DELIMITER $$
-
-    CREATE EVENT <event_name>
-        ON SCHEDULE EVERY 1 MINUTE DO 
-            BEGIN 
-                <Statements>
-            END $$
-
-    DELIMITER ;
-    ```
-
-## Query Optimization       
-
-- Improve performance and efficiency of the database in the context of response time, low power and memory consumptions
-
-### Ways of Query Optimization 
-- **Indexing**
-    - Speed up the search and retrieval queries 
-    - Index columns on the frequently used columns in the operations like WHERE, ORDER BY, JOIN, GROUP BY 
-- **Avoid using Wildcards at the beginning of LIKE** 
-    - It reduces the functionality of the Indexing 
-- **Avoid performing functions on the indexed columns** 
-    - Reduces the efficiency of the indexing 
-- **Avoid SELECT *** 
-    - Can slow down operations
-- **Use proper joins** 
-- **Use EXISTS instead of IN (while checking the presence)**
-    - Because EXISTS stops when the match is found but IN will perform a full table scan 
-- **Use joins instead of subqueries** 
-- **Use TOP and LIMIT**
-- **Monitor Query performance**
-    - Using EXPLAIN and Analyze 
-
-    #### Explain
-    ```sql
-    EXPLAIN 
-    SELECT id FROM Employee WHERE index_id = 1;
-    ```
-
-        - Shows the query execution plan without actually executing the query .
-        - Helps to understand how the database is being accessed with indexing and join.
-    
-    #### Explain Analyze 
-    ```sql
-    EXPLAIN ANALYZE 
-    SELECT id FROM Employee WHERE index_id = 1;
-    ```
-        - Shows the query execution plan by actually running the query
-        - It includes number of rows processed , time taken for each step.
-
-
-
-## Indexing 
-
-- A data structure technique implemented to speed up the data retrieval operation on a database table by minimizing the number of disk accesses 
-- Comes with the additional cost on writing and storage space for the indexing 
+- **GRANT**: Provide privileges to users
 
 ```sql
-CREATE INDEX <index_name> ON <column_name>
+CREATE USER <user_name>@<host>
+IDENTIFIED BY <pwd>;
+
+GRANT SELECT, INSERT ON <database>.<table_name>
+TO <user_name>@<host>;
+
+FLUSH PRIVILEGES;
+
+REVOKE SELECT, INSERT ON <database>.<table_name>
+FROM <user_name>@<host>;
+
+FLUSH PRIVILEGES;
 ```
 
+FLUSH PRIVILEGES is used to reload the GRANT tables in MySQL.
+
+### Slowly Changing Dimensions
+A method used in databases to track data that changes over time.
+
+Example: A user changes from one location to another location 
+
+- **TYPE 1**: Overwrite the old data
+    - No history is maintained / old data can't be retrieved 
+- **TYPE 2**: Add new columns to track versioning details 
+    - History is maintained / old data can be retrieved 
+- **TYPE 3**: Add a new column to track only the previous value 
+    - Partial history is maintained
+
+### Stored Procedures
+A set of SQL statements that can be saved and reused when required.
+Provides encapsulation and optimized query performance.
+
+```sql 
+DELIMITER $$
+
+CREATE PROCEDURE <procedure_name>
+BEGIN 
+        <Statements>
+END $$
+
+DELIMITER ;
+
+CALL procedure_name;
 ```
-Structure of Index:
+
+The delimiter tells SQL where the command actually ends.
+
+### Triggers
+A set of operations executed automatically in response to certain DML events such as insertion, deletion, or updates.
+
+```sql
+DELIMITER $$
+
+CREATE TRIGGER <trigger_name>
+AFTER INSERT ON <table_name>
+FOR EACH ROW
+BEGIN 
+        <Statements>
+END $$
+        
+DELIMITER ;
+```
+
+### Events
+Events are tasks that run according to user-defined schedules.
+
+```sql
+DELIMITER $$
+
+CREATE EVENT <event_name>
+ON SCHEDULE EVERY 1 MINUTE DO 
+BEGIN 
+        <Statements>
+END $$
+
+DELIMITER ;
+```
+
+### Query Optimization
+Improves database performance and efficiency in terms of response time, power usage, and memory consumption.
+
+#### Ways to Optimize Queries
+- **Indexing**
+    - Speed up search and retrieval queries 
+    - Index columns frequently used in WHERE, ORDER BY, JOIN, GROUP BY operations
+- **Avoid wildcards at the beginning of LIKE**
+    - It reduces the functionality of indexing 
+- **Avoid functions on indexed columns**
+    - Reduces the efficiency of indexing 
+- **Avoid SELECT ***
+    - Can slow down operations
+- **Use proper joins**
+- **Use EXISTS instead of IN** (when checking for presence)
+    - EXISTS stops when a match is found, but IN performs a full table scan 
+- **Use joins instead of subqueries**
+- **Use TOP and LIMIT clauses**
+- **Monitor query performance**
+    - Using EXPLAIN and ANALYZE
+
+#### EXPLAIN
+```sql
+EXPLAIN 
+SELECT id FROM Employee WHERE index_id = 1;
+```
+- Shows the query execution plan without executing the query
+- Helps understand how the database accesses data, including indexing and joins
+
+#### EXPLAIN ANALYZE
+```sql
+EXPLAIN ANALYZE 
+SELECT id FROM Employee WHERE index_id = 1;
+```
+- Shows the query execution plan by actually running the query
+- Includes number of rows processed and time taken for each step
+
+### Indexing
+A data structure technique to speed up data retrieval operations by minimizing disk accesses.
+Includes additional costs for writing and storage space.
+
+```sql
+CREATE INDEX <index_name> ON <table_name>(<column_name>);
+```
+
+**Structure of Index:**
+```
 Search Key : Data Reference 
 ```
 
-- Search Key is the key (present in the table) we used to search in the table
-- Data references are the collections of pointers that point to the disk block where the value of the key is stored
+- **Search Key**: The key (present in the table) used to search in the table
+- **Data References**: Collection of pointers that point to disk blocks where key values are stored
 
 ### Need for Indexing
 - Faster Search operations 
