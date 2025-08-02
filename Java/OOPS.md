@@ -39,28 +39,31 @@
 
 #### 4 Pillars of OOP :-
 
-1. Encapsulation - Hides internal data and exposes only what’s necessary.
-
-2. Abstraction - Hides complex implementation and shows only important details.
-
-3. Inheritance - Same method behaves differently based on the object.
-
-4. Polymorphism - Same method behaves differently based on the object.
+1. **Encapsulation** – Bundling data and methods together, restricting direct access to internal state.
+2. **Abstraction** – Exposing only essential features, hiding implementation details from the user.
+3. **Inheritance** – Mechanism for a class to acquire properties and behaviors from another class.
+4. **Polymorphism** – Ability for methods or objects to take multiple forms, enabling different behaviors based on context.
 
 
 #### Q/A :-
 
-- What is Class ?
+<details>
+<summary>What is Class?</summary>
 
-    - A blueprint for creating objects. It defines properties (attributes) and behaviors (methods).
+A blueprint for creating objects. It defines properties (attributes) and behaviors (methods).
 
-- What is Object class?
+</details>
 
-    - In Java, Object class is the root/parent class of all classes
+<details>
+<summary>What is Object class?</summary>
 
-    - Every class automatically inherits from Object class if no explicit parent is specified
+In Java, Object class is the root/parent class of all classes.
 
-    - Object class provides common methods like toString(), equals(), hashCode() that all objects can use
+Every class automatically inherits from Object class if no explicit parent is specified.
+
+Object class provides common methods like `toString()`, `equals()`, `hashCode()` that all objects can use.
+
+</details>
 
 - What is hashcode ?
 
