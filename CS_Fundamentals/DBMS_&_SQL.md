@@ -1,4 +1,4 @@
-# Data Base Management System
+# Data Base Management System & SQL
 
 ## Data Model 
 * Schema diff Data Model 
@@ -298,6 +298,154 @@ WITH CTE1 AS (
 
 SELECT * FROM CTE1; -- CTE1 is available 
 SELECT * FROM CTE1; -- Error: CTE1 doesn't exist
+```
+## ALTER Commands
+
+ALTER commands change the structure or schema of database objects.
+
+```sql
+-- Rename a table
+ALTER TABLE <table_name> RENAME TO <new_table_name>;
+
+-- Add a new column
+ALTER TABLE <table_name> ADD COLUMN <column_name> <data_type>;
+
+-- Drop an existing column
+ALTER TABLE <table_name> DROP COLUMN <column_name>;
+
+-- Modify column data type
+ALTER TABLE <table_name> MODIFY COLUMN <column_name> <data_type>;
+```
+
+## Constraints
+
+Constraints enforce rules on the data in tables to maintain data integrity.
+
+### Types of Constraints
+
+- **PRIMARY KEY** 
+    - Uniquely identifies each row in a table
+    - Cannot contain NULL values
+    - Only one per table
+
+- **COMPOSITE KEY** 
+    - Group of two or more columns that together uniquely identify a row
+    - Individual columns may not be unique on their own
+
+- **UNIQUE** 
+    - Ensures all values in a column are different
+    - Unlike PRIMARY KEY, allows NULL values (typically once)
+
+- **NOT NULL** 
+    - Ensures a column cannot store NULL values
+
+- **CHECK** 
+    - Restricts the values that can be placed in a column
+    
+    ```sql
+    CREATE TABLE Employees (
+            Gender CHAR(1) CHECK (Gender IN ('M', 'F'))
+    );
+    ```
+
+- **FOREIGN KEY** 
+    - References a column in another table (usually a PRIMARY KEY)
+    - Enforces referential integrity
+    - To delete in the referenced table (parent), first delete related data from the referencing table (child) or use CASCADE options
+    
+    ```sql
+    CREATE TABLE Orders (
+            order_id INT,
+            customer_id INT,
+            FOREIGN KEY (customer_id) REFERENCES Customers(customer_id) ON DELETE CASCADE
+    );
+    ```
+
+### Key Types
+
+- **Minimal Key** - The minimum set of attributes needed to uniquely identify a row (e.g., `id`)
+- **Non-Minimal Key** - Includes extra columns not needed for uniqueness (e.g., `id, name`)
+- **Natural Key** - A naturally occurring attribute that is inherently unique (e.g., SSN, ISBN)
+- **Surrogate Key** - System-generated value used for unique identification (e.g., auto-increment ID)
+- **Super Key** - Any set of columns that can uniquely identify a row, regardless of whether it's minimal or not
+
+## WHERE vs HAVING Clauses
+
+- **WHERE**
+    - Filters rows before aggregation or GROUP BY
+    - Appears before the GROUP BY clause
+    - Works only with non-aggregated columns
+    - Can be used without GROUP BY
+
+- **HAVING**
+    - Filters rows after they have been grouped
+    - Appears after GROUP BY clause
+    - Works with aggregated columns
+    - Cannot be used without GROUP BY
+
+> **Note**: `!=` and `=` operators are case sensitive when comparing string values. For case-insensitive comparison, use `LIKE` with wildcards such as `'%txt'`, `'%txt%'`, `'txt%'`.
+
+## SQL Query Execution Order
+
+```sql
+FROM + JOIN
+WHERE
+GROUP BY
+HAVING
+SELECT / WINDOW FUNCTION
+ORDER BY
+LIMIT / OFFSET
+```
+
+## NULL Handling Functions
+
+- **COALESCE(col1, col2, col3, ...)**
+    - Returns the first non-null column value from the list
+    - Accepts more than two arguments
+
+- **IFNULL(col1, col2)**
+    - Accepts only two arguments
+    - If col1 is null, returns col2 (even if col2 is also null)
+
+## Subqueries
+
+A subquery (nested query or inner query) is a query within another query that provides a result to the outer query.
+
+### Types of Subqueries
+
+- **Scalar Subquery**: Returns a single value (one row, one column)
+- **Columnar Subquery**: Returns a single column with multiple rows
+- **Row Subquery**: Returns a single row with multiple columns
+- **Table Subquery**: Returns a virtual table (multiple rows and columns)
+
+## Views
+
+A view is a virtual table based on the result of an SQL query. It doesn't store data; it only stores the SQL query and generates results dynamically during execution.
+
+### Benefits
+- Provides security and abstraction
+- Simplifies complex queries
+- Controls access to specific data
+
+### Limitations
+- Creates dependencies (if underlying tables change, views may need modification)
+- May impact performance for complex views
+
+### Syntax
+
+```sql
+-- Creating a view
+CREATE VIEW <view_name> AS 
+SELECT col1
+FROM <table_name>
+WHERE col1 = 1;
+
+-- Using a view
+SELECT *
+FROM <view_name>;
+
+-- Removing a view
+DROP VIEW <view_name>;
 ```
 
 ## Window Functions
