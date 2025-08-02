@@ -47,23 +47,17 @@
 
 #### Q/A :-
 
-<details>
-<summary>What is Class?</summary>
+- What is Class ?
 
-A blueprint for creating objects. It defines properties (attributes) and behaviors (methods).
+    - A blueprint for creating objects. It defines properties (attributes) and behaviors (methods).
 
-</details>
+- What is Object class?
 
-<details>
-<summary>What is Object class?</summary>
+    - In Java, Object class is the root/parent class of all classes
 
-In Java, Object class is the root/parent class of all classes.
+    - Every class automatically inherits from Object class if no explicit parent is specified
 
-Every class automatically inherits from Object class if no explicit parent is specified.
-
-Object class provides common methods like `toString()`, `equals()`, `hashCode()` that all objects can use.
-
-</details>
+    - Object class provides common methods like toString(), equals(), hashCode() that all objects can use
 
 - What is hashcode ?
 
@@ -145,7 +139,7 @@ Object class provides common methods like `toString()`, `equals()`, `hashCode()`
     - Primitive data types are passed by value and non primitive data types are passed by reference. Java supports only call be value and not call by reference 
 
 - Does Java support destructors?
-    No, Java does not support destructors because:
+    - No, Java does not support destructors because:
     - Java uses Garbage Collection (GC) to manage memory automatically
     - You don't need to manually delete objects like in C++
 
@@ -318,7 +312,12 @@ class Child extends Parent {
 
     - Even though it's a child class the it can't inherit the private variables and methods
 
-- A child class reference variable can't point to the parent class object ?
+    - When the parent class have the parameterized constructors , then the repective arguments should be passed to the parent class constructor from the child class constructor during the object creation.
+
+    - If no parameterized constructor , then we don't want to anything because the child class calls the default constructor of the the parent class.
+
+
+- Can a child class reference variable can't point to the parent class object ?
 
     - No , ```subclass obj = new parentclass()``` is not possible.Because the obj may not have all the properties of the child class.
 
@@ -330,15 +329,7 @@ class Child extends Parent {
 
 - What are the use cases of super ?
 
-    - Used to access the constructor of the parent class from the child class
-
-    - Used to access the variables of the parent class from the child class
-
-- What are the considerations during the inheritance ?
-
-    - When the parent class have the parameterized constructors , then the repective arguments should be passed to the parent class constructor from the child class constructor during the object creation.
-
-    - If no parameterized constructor , then we don't want to anything because the child class calls the default constructor of the the parent class.
+    - Used to access the constructor , variables of the parent class from the child class
 
 - What is upcasting ?
 
@@ -416,6 +407,8 @@ class Child extends Parent {
     - Only the overriding methods are determined in this way and the variables still accessed based on the reference variable.
 
     - In short, Object type determines the version of the method that can be executed.
+
+    - This is possible with help of method dispatch / dynamic dispatch.
 
 - Can static methods be overridden ?
 
@@ -543,7 +536,7 @@ Abstraction in Java is the process of hiding the implementation details and only
 
                 No implementation, only method declarations — subclasses must implement all methods.
 
-![Abstraction Example](D:/Magesh/LLD/images/abstraction.png)
+![Abstraction Example](../images/abstraction.png)
 
 ### Abstract Classes 
 
