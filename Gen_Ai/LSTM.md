@@ -2,6 +2,15 @@
 
 ![LSTM (Long Short-Term Memory) Neural Network Architecture](../images/lstm.jpg)
 
+## Image Components Breakdown
+
+The LSTM architecture shown in the image above consists of:
+
+### Gate Structure
+- **1st cell:** Forget Gate - Determines what information to discard
+- **2nd & 3rd cells:** Input Gate - Controls what new information to store
+- **4th & 5th cells:** Output Gate - Controls what information to output
+
 ## Why LSTM instead of RNN?
 
 * **RNNs forget long-term info** (they suffer from vanishing gradient problem or gradient exploding problem)
