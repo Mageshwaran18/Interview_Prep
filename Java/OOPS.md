@@ -632,11 +632,21 @@ Abstraction in Java is the process of hiding the implementation details and only
 
 - Why can't the methods in the interface be private?
 
-    - It reduces the visibility of the interface, affecting the core feature of the interface 
+    - It reduces the visibility of the interface, affecting the core feature of the interface but after Java 9 it's possible
 
 - Can an interface have a private method with definition?
 
     - Yes, private methods in interface are possible only if the method has the function definition.
+    - Java 9 Introduced this feature which supports code reusability.
+    - They cannot be abstract
+
+- Can the methods in java be protected ?
+
+    - No , Interface doesn't support protected methods 
+
+- Did private methods in the interface are inherited to the implementing class ?
+
+    - The private methods are not inherited to the implementing class
 
 - Are all the methods in interface public by default?
 

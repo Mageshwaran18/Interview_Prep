@@ -66,6 +66,17 @@ JVM is an abstract computing machine that enables a computer to run Java program
 
 ## Java Features
 - **Platform Independence**: "Write Once, Run Anywhere"
+Java is said to be "Write Once, Run Anywhere" (WORA) because of its platform-independent nature, made possible by the Java Virtual Machine (JVM).
+
+🔹 What does "Write Once, Run Anywhere" mean?
+It means that you can:
+
+Write your Java code on one machine (e.g., Windows),
+
+Compile it into bytecode, and
+
+Run that same bytecode on any other system (e.g., Linux, macOS, Android),
+without changing or recompiling your source code, as long as there's a JVM available.
 - **Object-Oriented**: Based on objects and classes
 - **Robust**: Strong memory management, exception handling
 - **Secure**: No pointer arithmetic, bytecode verification
