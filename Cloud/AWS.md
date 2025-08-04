@@ -167,6 +167,17 @@ AWS Global Infrastructure is designed for high availability, fault tolerance, an
 - **Private Subnets**: No direct internet access, use NAT for outbound traffic
 - **Use Cases**: Public for web servers, private for databases
 
+| Feature                | Security Group (SG)                                    | Network ACL (NACL)                                        |
+| ---------------------- | ------------------------------------------------------ | --------------------------------------------------------- |
+| **Level**              | Instance-level (acts as a virtual firewall)            | Subnet-level (controls traffic in/out of subnet)          |
+| **Stateful/Stateless** | **Stateful** (return traffic is automatically allowed) | **Stateless** (return traffic must be explicitly allowed) |
+| **Rules apply to**     | EC2 instances                                          | All resources in a subnet                                 |
+| **Rules evaluated**    | All rules are evaluated                                | Rules are evaluated in order (lowest to highest)          |
+| **Allow/Deny rules**   | Only **Allow** rules                                   | Both **Allow** and **Deny** rules                         |
+| **Default behavior**   | Denies all traffic unless explicitly allowed           | Allows all traffic unless rules are modified              |
+| **Use Case**           | Fine-grained control at instance level                 | Basic subnet-level control, e.g., blocking IPs            |
+
+
 ### CIDR Blocks
 - **IP Range Notation**: e.g., 10.0.0.0/16
 - **Subnet Sizing**: /24 provides 256 IPs, /28 provides 16 IPs
