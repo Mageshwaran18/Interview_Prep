@@ -46,12 +46,64 @@
     - Don't know what to fill 
     - Unwanted info
     - Forget to fill
-    
-* Based on degree / cardinality relationships 
-    - One to One [Person - Passport] - any one can be PK 
-    - One to Many [Author - Book] - PK should lie on Many side
-    - Many to One [Employees - Department] - PK should be on the many side 
-    - Many to Many [Student - Course] - A junction table is needed which is also know as Association / Linking table between two entities
+## 📘 Entity Relationship Based on Degree / Cardinality
+
+This document explains different types of relationships in database design based on cardinality (degree) and how to handle them in terms of primary keys (PK), foreign keys (FK), and junction (association) tables.
+
+---
+
+### 🔹 One-to-One (1:1)
+**Example:** `Person - Passport`
+
+- Any one of the entities can hold the **primary key**.
+- **No junction table** is required.
+- Each person has at most one passport, and each passport is assigned to one person.
+
+---
+
+### 🔹 One-to-Many (1:N)
+**Example:** `Author - Book`
+
+- **Primary key** should lie on the **"One" side** (Author).
+- The **"Many" side** (Book) will have a **foreign key** pointing to the Author.
+- **No junction table** is needed.
+- One author can write many books, but each book is written by only one author.
+
+---
+
+### 🔹 Many-to-One (N:1)
+**Example:** `Employee - Department`
+
+- This is the inverse of One-to-Many.
+- **Primary key** is on the **"One" side** (Department).
+- The **"Many" side** (Employee) holds a **foreign key** referencing the department.
+- **No junction table** is required.
+- Many employees can belong to the same department.
+
+---
+
+### 🔹 Many-to-Many (M:N)
+**Example:** `Student - Course`
+
+- A **junction table** (also called **association/linking table**) is required.
+- The junction table contains **foreign keys** referencing both `Student` and `Course`.
+- It should have:
+  - A **composite primary key** using `student_id` and `course_id`, **or**
+  - A **surrogate primary key** like `enrollment_id`.
+- One student can enroll in many courses, and each course can have many students.
+
+---
+
+### 📝 Summary Table
+
+| Relationship Type | Example          | Junction Table | Primary Key Location                        |
+|-------------------|------------------|----------------|---------------------------------------------|
+| One-to-One        | Person - Passport| ❌ Not needed   | Either side                                  |
+| One-to-Many       | Author - Book    | ❌ Not needed   | One side (Author), FK on Many side (Book)   |
+| Many-to-One       | Employee - Dept  | ❌ Not needed   | One side (Department), FK on Many side      |
+| Many-to-Many      | Student - Course | ✅ Required     | Composite PK or Surrogate PK in junction tbl|
+
+
 
 ## Participation constraint
 - It defines the association between the entity in the participation set and the related is mandatory or not
