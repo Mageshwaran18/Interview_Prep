@@ -1,4 +1,5 @@
-# Trees by Striver [ https://youtu.be/_ANrF3FJm7I?feature=shared ]
+# Trees 
+- by Striver [ https://youtu.be/_ANrF3FJm7I?feature=shared ]
 
 ## Order of the Tree problems
 
