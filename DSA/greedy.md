@@ -15,6 +15,6 @@ Greedy Algorithm is an algorithmic paradigm where, at every step, you make the l
 
 1. [Jump Game I](https://leetcode.com/problems/jump-game/) - `O(N)` time, `O(1)` space
 2. [Jump Game II](https://leetcode.com/problems/jump-game-ii/description/) - `O(N)` time, `O(1)` space
-
+3. [Minimum Operations](https://www.geeksforgeeks.org/problems/find-optimum-operation4504/1?page=1&category=Greedy&sortBy=submissions) - `O(log N)` time, `O(1)` space
 ---
 
