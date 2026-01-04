@@ -19,4 +19,5 @@ We can use dynamic programming in two types of problems:
 
 
 -- 1D -- 
-1. 
+1. House Robber I [https://leetcode.com/problems/house-robber/description/]
+2. House Robber II [https://leetcode.com/problems/house-robber-ii/description/]
